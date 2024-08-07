@@ -1,0 +1,42 @@
+<h1>Restaurants#show</h1>
+<p>Find me in app/views/restaurants/show.html.erb</p>
+
+<div class="d-flex flex-row">
+  <div class="p-2">
+  <%= link_to restaurants_path, class: 'btn btn-primary' do %>
+    <i class="fa-solid fa-circle-left"></i> Retour
+  <% end %>
+  </div>
+  <div class="p-2">
+  <%= link_to edit_restaurant_path(@restaurant), class: 'btn btn-primary' do %>
+  <i class="fa-solid fa-pen-to-square"></i> Edit
+  <% end %>
+  </div>
+  <div class="p-2">
+  <%= button_to @restaurant, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'btn btn-warning' do %>
+      <i class="fa-solid fa-trash-can">Supprimer</i>
+  <% end %>
+  </div>
+</div>
+
+<h2>Restaurant</h2>
+  <%= @restaurant.name %><br>
+  <%= @restaurant.address %><br>
+  <%= @restaurant.phone_number %><br>
+  <%= @restaurant.category %><br>
+
+
+<h2>Reviews</h2>
+<%= link_to 'Add review', new_restaurant_review_path(@restaurant), class: 'btn btn-primary' %>
+<% if @reviews.any? %>
+  <ul>
+    <% @reviews.each do |review| %>
+      <li>
+        <strong>Rating:</strong> <%= review.rating %>/5<br>
+        <strong>Content:</strong> <%= review.content %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews yet.</p>
+<% end %>
